@@ -130,5 +130,11 @@ export default {
     'status_unpublished': '下架',
     'title': '報導標題',
     'updated_time': '更新時間',
-  }
+  },
+  'newsletter': {
+    'aside': {
+      'campaign': '活動列表',
+      'list_management': '群組列表',
+    },
+  },
 }

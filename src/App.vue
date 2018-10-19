@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <PageHeader></PageHeader>
-    <PageAside></PageAside>
+    <PageHeader v-show="!isPathNewsletter"></PageHeader>
+    <PageAside v-show="!isPathNewsletter"></PageAside>
     <transition name="fade" mode="out-in">
-      <router-view class="view"></router-view>
+      <router-view :class="[ 'view', { 'view--dark': !isPathNewsletter, } ]"></router-view>
     </transition>
   </div>
 </template>
@@ -16,7 +16,12 @@ export default {
   components: {
     PageAside,
     PageHeader
-  },  
+  },
+  computed: {
+    isPathNewsletter () {
+      return this.$route.name.includes('newsletter-manager')
+    },
+  }
 }
 </script>
 
@@ -32,8 +37,9 @@ button
   // max-width 800px
   margin 0 auto
   position relative
-  background-color #4a4a4a
   padding-top 70px
+  &--dark 
+    background-color #4a4a4a
   &.locked
     width 100%
     height 100vh

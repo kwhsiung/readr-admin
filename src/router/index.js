@@ -13,6 +13,11 @@ const MemoManagerList = () => import('src/views/MemoManagerList.vue')
 const MemoManagerReplies = () => import('src/views/MemoManagerReplies.vue')
 const ReportManager = () => import('src/views/ReportManager.vue')
 
+const IndexNewsletter = () => import('src/views/IndexNewsletter.vue')
+const Campaign = () => import('src/views/newsletter/Campaign.vue')
+const ListManagement = () => import('src/views/newsletter/ListManagement.vue')
+const ListManagementGroup = () => import('src/views/newsletter/ListManagementGroup.vue')
+
 export function createRouter () {
   return new Router({
     mode: 'history',
@@ -25,6 +30,29 @@ export function createRouter () {
       { path: '/memo-manager/list', component: MemoManagerList, meta: { permission: 'admin' }},
       { path: '/memo-manager/replies', component: MemoManagerReplies, meta: { permission: 'admin' }},
       { path: '/report-manager/report', component: ReportManager, meta: { permission: 'admin' }},
+      { 
+        name: 'newsletter-manager',
+        path: '/newsletter-manager',
+        component: IndexNewsletter,
+        meta: { permission: 'admin' },
+        children: [
+          {
+            name: 'newsletter-manager-campaign',
+            path: 'campaign',
+            component: Campaign,
+          },
+          {
+            name: 'newsletter-manager-list-management',
+            path: 'list-management',
+            component: ListManagement,
+          },
+          {
+            name: 'newsletter-manager-list-management-group',
+            path: 'list-management/:id',
+            component: ListManagementGroup,
+          },
+        ]
+      },
     ]
   })
 }
